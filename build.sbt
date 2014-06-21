@@ -26,7 +26,10 @@ lazy val api = project
       jdbc,
       anorm,
       "org.postgresql" % "postgresql" % "9.3-1101-jdbc4",
-      "org.mindrot"          %  "jbcrypt"                 % "0.3m"
+      "org.mindrot"          %  "jbcrypt"                 % "0.3m",
+      "org.scalacheck" %% "scalacheck" % "1.11.4" % "test",
+      "org.specs2" %% "specs2" % "2.3.12" % "test",
+      ws % "test"
     )
   )
 

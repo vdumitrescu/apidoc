@@ -27,7 +27,7 @@ object Organizations extends Controller {
         OrganizationDao.findAll(name = Some(name), limit = 1).headOption match {
           case None => {
             val org = OrganizationDao.createWithAdministrator(request.user, name)
-            Ok(Json.toJson(org))
+            Created(Json.toJson(org))
           }
 
           case Some(org: Organization) => {

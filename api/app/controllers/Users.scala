@@ -32,7 +32,8 @@ object Users extends Controller {
             val user = UserDao.upsert(email = email,
                                       name = (request.body \ "name").asOpt[String],
                                       imageUrl = (request.body \ "image_url").asOpt[String])
-            Ok(Json.toJson(user))
+            println(s"${request.body} -> $user")
+            Created(Json.toJson(user))
           }
 
           case Some(u: User) => {
@@ -47,7 +48,7 @@ object Users extends Controller {
     UserDao.findByGuid(guid) match {
       case None => NotFound
       case Some(user: User) => {
-        val newUser = user.copy(email = (request.body \ "name").asOpt[String].getOrElse(user.email),
+        val newUser = user.copy(email = (request.body \ "email").asOpt[String].getOrElse(user.email),
                                 name = (request.body \ "name").asOpt[String],
                                 image_url = (request.body \ "image_url").asOpt[String])
         UserDao.update(newUser)
